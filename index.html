@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>تحرر - موقع توعوي ضد الإباحية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Tajawal', sans-serif;
+      background: #f4f8ff;
+      color: #003366;
+    }
+
+    header {
+      background: #004aad;
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 3em;
+      margin: 0;
+    }
+
+    nav {
+      background: #003366;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 10px 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 12px 20px;
+      margin: 5px;
+      border-radius: 6px;
+      transition: background 0.3s;
+    }
+
+    nav a:hover {
+      background: #005bb5;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .intro-box {
+      max-width: 960px;
+      margin: 40px auto;
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    .intro-box h2 {
+      color: #004aad;
+      font-size: 2em;
+      margin-bottom: 15px;
+    }
+
+    .intro-box p {
+      font-size: 1.2em;
+      line-height: 1.8;
+    }
+
+    .info-section {
+      max-width: 1100px;
+      margin: 60px auto;
+      padding: 20px;
+    }
+
+    .info-card {
+      display: flex;
+      align-items: center;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+      margin-bottom: 30px;
+      overflow: hidden;
+    }
+
+    .info-card img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .info-text {
+      padding: 20px;
+      flex: 1;
+    }
+
+    .info-text h3 {
+      margin: 0 0 10px;
+      color: #004aad;
+    }
+
+    .info-text p {
+      margin: 0;
+      font-size: 1.1em;
+      line-height: 1.6;
+    }
+
+    .countdown-section {
+      max-width: 960px;
+      margin: 50px auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+
+    .timer-box {
+      flex: 1 1 300px;
+      background: #e6f0ff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,74,173,0.3);
+    }
+
+    .timer-title {
+      font-size: 1.6em;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .timer-display {
+      font-size: 2.8em;
+      font-weight: 700;
+      font-family: 'Courier New', Courier, monospace;
+      letter-spacing: 0.1em;
+      margin-bottom: 20px;
+    }
+
+    .btn-start {
+      background: #004aad;
+      border: none;
+      color: white;
+      font-size: 1.1em;
+      padding: 12px 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-bottom: 10px;
+    }
+
+    .btn-start:hover {
+      background: #003366;
+    }
+
+    .btn-relapse {
+      background: #cc0000;
+      border: none;
+      color: white;
+      font-size: 1.1em;
+      padding: 12px 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn-relapse:hover {
+      background: #990000;
+    }
+    .quote-box {
+  max-width: 800px;
+  margin: 30px auto;
+  background: #fff8e1;
+  color: #663c00;
+  border-left: 6px solid #ff9800;
+  padding: 20px 25px;
+  border-radius: 12px;
+  font-size: 1.3em;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  font-family: 'Tajawal', sans-serif;
+}
+
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>تحرر</h1>
+  <p>موقع عربي توعوي للتعافي من الإباحية</p>
+</header>
+
+<nav>
+  <a href="#">الرئيسية</a>
+  <a href="about.html">من نحن</a>
+  <a href="articles.html">مقالات توعوية</a>
+  <a href="events.html">فيديوهات توعوية</a>
+  <a href="consultations.html">قصص متعافين</a>
+<a href="media.html">الميديا</a>
+<a href="https://forms.gle/5dhGVtsWt3D8K6Dp6" target="_blank" class="btn-start">تسجيل الدخول لبدء عداد التعافي</a>
+</nav>
+
+<img class="hero-image" src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?auto=format&fit=crop&w=1600&q=80" alt="صورة تحمل طابع الأمل والنور" />
+
+<div class="intro-box">
+  <h2>رسالتنا</h2>
+  <p>
+    نحن فريق <strong>تحرر</strong> نؤمن بأن الإنسان قادر على التخلص من الإدمان الجنسي والرجوع إلى صفاء النفس والكرامة، عبر التوعية والمجتمع والدعم المتكامل. انضم إلينا في رحلة التعافي واستعادة السيطرة على حياتك.
+  </p>
+</div>
+
+<!-- عداد التعافي -->
+<div class="countdown-section">
+  <div class="timer-box" id="recovery-timer">
+    <div class="timer-title">عداد التعافي</div>
+    <div class="timer-display" id="recovery-display">00:00:00</div>
+    <div id="relapse-count" style="margin-top: 10px; font-size: 1em; color: #cc0000;">
+  عدد الانتكاسات: 0
+</div>
+    <button class="btn-start" id="start-recovery">ابدأ الآن</button>
+    <button class="btn-relapse" id="reset-recovery">انتكاسة</button>
+    <button class="btn-start" id="reset-relapse-count" style="background:#888;">إعادة تعيين عدد الانتكاسات</button>
+    <div class="quote-box" id="quote-box">
+  <p id="motivational-quote">تحميل...</p>
+</div>
+  </div>
+</div>
+<div class="info-section">
+  <div class="info-card">
+    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=400&q=80" alt="الدماغ والتأثيرات السلبية">
+    <div class="info-text">
+      <h3>الإباحية تغيّر تركيبة الدماغ</h3>
+      <p>تشير الدراسات إلى أن الإدمان يؤثر على مناطق التحفيز والتركيز في الدماغ، مما يضعف الإرادة ويزيد من القلق.</p>
+    </div>
+  </div>
+  <div class="info-card">
+    <img src="https://www.aljazeera.net/wp-content/uploads/2018/04/78eed8d5-78ae-4a58-adce-ec47c6511c98.jpeg?quality=80&resize=686%2C513">
+    <div class="info-text">
+      <h3>العزلة والانفصال عن المجتمع</h3>
+      <p>الإدمان يؤدي إلى الانسحاب من العلاقات الاجتماعية ويزيد من الشعور بالوحدة والانفصال.</p>
+    </div>
+  </div>
+  <div class="info-card">
+    <img src="https://images.unsplash.com/photo-1508780709619-79562169bc64?auto=format&fit=crop&w=400&q=80" alt="التحفيز الزائد">
+    <div class="info-text">
+      <h3>التحفيز الزائد يضعف المتعة الطبيعية</h3>
+      <p>الاستهلاك المفرط للإباحية يقلل من الاستجابة للمتعة الطبيعية مثل العلاقات الحقيقية أو الإنجاز الشخصي.</p>
+    </div>
+  </div>
+  <div class="info-card">
+    <img src="https://bing.com/th/id/BCO.1e614c68-b4e0-4617-9ae9-e1f6386207ed.png" alt="التحرر النفسي">
+    <div class="info-text">
+      <h3>التحرر يبدأ من الداخل</h3>
+      <p>الخطوة الأولى نحو التعافي هي الاعتراف بالمشكلة والرغبة الحقيقية في التغيير.</p>
+    </div>
+  </div>
+  <div class="info-card">
+    <img src="https://bing.com/th/id/BCO.8eb12ce3-24f8-4961-9bbd-f5d61ba65ff5.png" alt="الدعم المجتمعي">
+    <div class="info-text">
+      <h3>الدعم المجتمعي يصنع الفرق</h3>
+      <p>الانضمام إلى مجموعات دعم أو برامج تعافي يعزز فرص النجاح ويقلل الانتكاسات.</p>
+    </div>
+  </div>
+  <div class="info-card">
+    <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=400&q=80" alt="الهوية والكرامة">
+    <div class="info-text">
+      <h3>كرامتك لا تُقاس بالماضي</h3>
+      <p>كل إنسان يستحق فرصة جديدة، والهوية الحقيقية لا تُبنى على الأخطاء بل على التغيير.</p>
+    </div>
+  </div>
+  <div class="info-card">
+    <img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=400&q=80" alt="التحكم بالوقت">
+    <div class="info-text">
+      <h3>الإباحية تسرق وقتك</h3>
+      <p>الإدمان يستهلك ساعات من اليوم دون فائدة، مما يؤثر على الإنتاجية والطموح.</p>
+    </div>
+  </div>
+  <div class="info-card">
+    <img src="https://bing.com/th/id/BCO.6ae37b07-3208-4528-9dfa-2c4b2f927cb9.png" alt="التحفيز الذاتي">
+    <div class="info-text">
+      <h3>التحفيز الذاتي هو الوقود</h3>
+      <p>اكتب أهدافك، واحتفل بالإنجازات الصغيرة، وذكّر نفسك بأنك تستحق حياة أفضل.</p>
+    </div>
+
+  </div>
+  
+</div>
+<script>
+  let recoveryInterval = null;
+  const recoveryDisplay = document.getElementById('recovery-display');
+  const relapseCountDisplay = document.getElementById('relapse-count');
+
+  function formatTime(seconds) {
+    const days = Math.floor(seconds / (3600 * 24));
+    const hrs = Math.floor((seconds % (3600 * 24)) / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+
+    return `${days} يوم ${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  }
+
+  function updateRecoveryTimer() {
+    const startTimestamp = localStorage.getItem('recoveryStart');
+    if (!startTimestamp) return;
+
+    const startTime = new Date(parseInt(startTimestamp));
+    const now = new Date();
+    const diffSeconds = Math.floor((now - startTime) / 1000);
+    recoveryDisplay.textContent = formatTime(diffSeconds);
+  }
+
+  function updateRelapseCount() {
+    const count = parseInt(localStorage.getItem('relapseCount')) || 0;
+    relapseCountDisplay.textContent = `عدد الانتكاسات: ${count}`;
+  }
+
+  // عند تحميل الصفحة
+  window.addEventListener('load', () => {
+    if (localStorage.getItem('recoveryStart')) {
+      updateRecoveryTimer();
+      recoveryInterval = setInterval(updateRecoveryTimer, 1000);
+    }
+    updateRelapseCount();
+  });
+
+  document.getElementById('start-recovery').addEventListener('click', () => {
+    if (!localStorage.getItem('recoveryStart')) {
+      const now = Date.now();
+      localStorage.setItem('recoveryStart', now.toString());
+    }
+    if (!recoveryInterval) {
+      recoveryInterval = setInterval(updateRecoveryTimer, 1000);
+    }
+  });
+
+  document.getElementById('reset-recovery').addEventListener('click', () => {
+    localStorage.removeItem('recoveryStart');
+    clearInterval(recoveryInterval);
+    recoveryInterval = null;
+    recoveryDisplay.textContent = "00:00:00";
+
+    // زيادة عدد الانتكاسات
+    let count = parseInt(localStorage.getItem('relapseCount')) || 0;
+    count++;
+    localStorage.setItem('relapseCount', count.toString());
+    updateRelapseCount();
+
+    alert("تم تسجيل الانتكاسة. يمكنك البدء من جديد.");
+  });
+    // زر إعادة تعيين عدد الانتكاسات
+  document.getElementById('reset-relapse-count').addEventListener('click', () => {
+    if (confirm("هل أنت متأكد أنك تريد إعادة تعيين عدد الانتكاسات؟")) {
+      localStorage.setItem('relapseCount', '0');
+      updateRelapseCount();
+      alert("تمت إعادة تعيين عدد الانتكاسات.");
+    }
+  });
+  const quotes = [
+    "لن تُهزم ما دمت تُحاول.",
+    "الحرية الحقيقية تبدأ من قرارك بأنك تستحق الأفضل.",
+    "كل يوم تبقى فيه قويًا، تقترب أكثر من الشخص الذي تريد أن تكونه.",
+    "الإدمان لا يعرّفك، بل قوتك في مقاومته هي من تُظهر حقيقتك.",
+    "أنت لست وحدك… ولكن قرار التعافي لا يمكن أن يتخذه أحد غيرك."
+  ];
+
+  const quoteBox = document.getElementById("motivational-quote");
+  const randomIndex = Math.floor(Math.random() * quotes.length);
+  quoteBox.textContent = quotes[randomIndex];
+
+
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>نموذج التعليقات</title>
+</head>
+<body>
+
+  <h2>اكتب تعليقك:</h2>
+  <input type="text" id="name" placeholder="اسمك"><br><br>
+  <textarea id="comment" placeholder="اكتب تعليقك هنا..."></textarea><br><br>
+  <button onclick="sendComment()">إرسال</button>
+
+  <hr>
+  <h3>التعليقات:</h3>
+  <div id="comments"></div>
+
+  <!-- هنا يبدأ كود Firebase الكاملة -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyC8PLQb3xDfZDoK1kW57c6H6qmY4w5c6Rs",
+      authDomain: "ibrahimweb-f170b.firebaseapp.com",
+      databaseURL: "https://ibrahimweb-f170b-default-rtdb.firebaseio.com", // ← هذا هو الرابط الذي ذكرته
+      projectId: "ibrahimweb-f170b",
+      storageBucket: "ibrahimweb-f170b.appspot.com",
+      messagingSenderId: "147504792336",
+      appId: "1:147504792336:web:87137f81315bd9dc989b95"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const commentsRef = ref(db, "comments");
+
+    window.sendComment = async function () {
+      const name = document.getElementById("name").value;
+      const comment = document.getElementById("comment").value;
+
+      if (name && comment) {
+        await push(commentsRef, {
+          name,
+          comment,
+          timestamp: Date.now()
+        });
+        alert("تم إرسال التعليق!");
+        document.getElementById("name").value = "";
+        document.getElementById("comment").value = "";
+      } else {
+        alert("يرجى ملء جميع الحقول.");
+      }
+    };
+
+    onValue(commentsRef, (snapshot) => {
+      const commentsDiv = document.getElementById("comments");
+      commentsDiv.innerHTML = "";
+      const data = snapshot.val();
+      if (data) {
+        const keys = Object.keys(data).reverse();
+        keys.forEach(key => {
+          const c = data[key];
+          const el = document.createElement("p");
+          el.innerHTML = `<strong>${c.name}</strong>: ${c.comment}`;
+          commentsDiv.appendChild(el);
+        });
+      }
+    });
+  </script>
+  <!-- هنا ينتهي كود Firebase -->
+
+</body>
+</html>
