@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>نموذج التعليقات</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+      color: #111827;
+      padding: 40px;
+      max-width: 600px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    h2, h3 {
+      color: #1f2937;
+      text-align: center;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 16px;
+      background-color: #fff;
+    }
+
+    textarea {
+      height: 100px;
+      resize: none;
+    }
+
+    button {
+      width: 100%;
+      background-color: #3b82f6;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    button:hover {
+      background-color: #2563eb;
+    }
+
+    #comments {
+      margin-top: 30px;
+      background-color: #ffffff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    #comments p {
+      background-color: #f9fafb;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-left: 4px solid #3b82f6;
+      border-radius: 6px;
+    }
+
+    strong {
+      color: #111827;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>📝 أرسل تعليقك</h2>
+  <input type="text" id="name" placeholder="👤 اسمك">
+  <textarea id="comment" placeholder="💬 اكتب تعليقك هنا..."></textarea>
+  <button onclick="sendComment()">📩 إرسال التعليق</button>
+
+  <hr>
+  <h3>📚 التعليقات السابقة</h3>
+  <div id="comments"></div>
+
+  <!-- Firebase Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyC8PLQb3xDfZDoK1kW57c6H6qmY4w5c6Rs",
+      authDomain: "ibrahimweb-f170b.firebaseapp.com",
+      databaseURL: "https://ibrahimweb-f170b-default-rtdb.firebaseio.com",
+      projectId: "ibrahimweb-f170b",
+      storageBucket: "ibrahimweb-f170b.appspot.com",
+      messagingSenderId: "147504792336",
+      appId: "1:147504792336:web:87137f81315bd9dc989b95"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const commentsRef = ref(db, "comments");
+
+    window.sendComment = async function () {
+      const name = document.getElementById("name").value.trim();
+      const comment = document.getElementById("comment").value.trim();
+
+      if (name && comment) {
+        await push(commentsRef, {
+          name,
+          comment,
+          timestamp: Date.now()
+        });
+        alert("✅ تم إرسال التعليق!");
+        document.getElementById("name").value = "";
+        document.getElementById("comment").value = "";
+      } else {
+        alert("⚠️ يرجى ملء جميع الحقول.");
+      }
+    };
+
+    onValue(commentsRef, (snapshot) => {
+      const commentsDiv = document.getElementById("comments");
+      commentsDiv.innerHTML = "";
+      const data = snapshot.val();
+      if (data) {
+        const keys = Object.keys(data).reverse();
+        keys.forEach(key => {
+          const c = data[key];
+          const el = document.createElement("p");
+          el.innerHTML = `<strong>${c.name}</strong>: ${c.comment}`;
+          commentsDiv.appendChild(el);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>صفحة التعافي مع تسجيل الدخول</title>
+  <style>
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: #f0f4f8;
+      margin: 0; padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto 40px;
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    h2 { text-align: center; color: #004aad; }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    button {
+      background-color: #004aad;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    button:disabled {
+      background-color: #999;
+      cursor: not-allowed;
+    }
+    #logout-btn {
+      background: #d9534f;
+      margin-top: 10px;
+    }
+    #recovery-display {
+      font-size: 30px;
+      text-align: center;
+      margin: 20px 0;
+    }
+    #relapse-count {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="auth-container">
+    <h2>تسجيل الدخول</h2>
+    <input type="email" id="email" placeholder="البريد الإلكتروني" required />
+    <input type="password" id="password" placeholder="كلمة المرور" required />
+    <button id="login-btn">تسجيل الدخول</button>
+    <p style="text-align:center; margin-top: 15px;">أو <a href="#" id="show-register">إنشاء حساب جديد</a></p>
+  </div>
+
+  <div class="container" id="register-container" style="display:none;">
+    <h2>إنشاء حساب جديد</h2>
+    <input type="email" id="reg-email" placeholder="البريد الإلكتروني" required />
+    <input type="password" id="reg-password" placeholder="كلمة المرور" required />
+    <button id="register-btn">إنشاء حساب</button>
+    <p style="text-align:center; margin-top: 15px;">لديك حساب؟ <a href="#" id="show-login">تسجيل الدخول</a></p>
+  </div>
+
+  <div class="container" id="main-app" style="display:none;">
+    <h2>مرحباً، <span id="user-email"></span></h2>
+    <button id="logout-btn">تسجيل الخروج</button>
+
+    <h2>⏱️ عداد التعافي</h2>
+    <p id="recovery-display">00:00:00</p>
+    <div style="text-align:center;">
+      <button id="start-recovery">بدء التعافي</button>
+      <button id="reset-recovery">انتكاسة (إعادة تعيين)</button>
+      <button id="reset-relapse-count">إعادة تعيين عدد الانتكاسات</button>
+    </div>
+    <p id="relapse-count">عدد الانتكاسات: 0</p>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyC8PLQb3xDfZDoK1kW57c6H6qmY4w5c6Rs",
+      authDomain: "ibrahimweb-f170b.firebaseapp.com",
+      projectId: "ibrahimweb-f170b",
+      storageBucket: "ibrahimweb-f170b.appspot.com",
+      messagingSenderId: "147504792336",
+      appId: "1:147504792336:web:02e0ef53500a25dd989b95"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // عناصر DOM
+    const authContainer = document.getElementById('auth-container');
+    const registerContainer = document.getElementById('register-container');
+    const mainApp = document.getElementById('main-app');
+    const userEmailSpan = document.getElementById('user-email');
+
+    const loginBtn = document.getElementById('login-btn');
+    const registerBtn = document.getElementById('register-btn');
+    const logoutBtn = document.getElementById('logout-btn');
+
+    const showRegisterLink = document.getElementById('show-register');
+    const showLoginLink = document.getElementById('show-login');
+
+    // عناصر العداد
+    const startBtn = document.getElementById('start-recovery');
+    const resetBtn = document.getElementById('reset-recovery');
+    const resetRelapseBtn = document.getElementById('reset-relapse-count');
+    const recoveryDisplay = document.getElementById('recovery-display');
+    const relapseCountDisplay = document.getElementById('relapse-count');
+
+    let recoveryInterval = null;
+
+    // عرض / إخفاء شاشات التسجيل / الدخول
+    showRegisterLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      authContainer.style.display = 'none';
+      registerContainer.style.display = 'block';
+    });
+    showLoginLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      registerContainer.style.display = 'none';
+      authContainer.style.display = 'block';
+    });
+
+    // تسجيل الدخول
+    loginBtn.addEventListener('click', () => {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      if (!email || !password) {
+        alert('يرجى ملء البريد الإلكتروني وكلمة المرور');
+        return;
+      }
+      auth.signInWithEmailAndPassword(email, password)
+        .catch(err => alert('خطأ في تسجيل الدخول: ' + err.message));
+    });
+
+    // إنشاء حساب جديد
+    registerBtn.addEventListener('click', () => {
+      const email = document.getElementById('reg-email').value;
+      const password = document.getElementById('reg-password').value;
+      if (!email || !password) {
+        alert('يرجى ملء البريد الإلكتروني وكلمة المرور');
+        return;
+      }
+      auth.createUserWithEmailAndPassword(email, password)
+        .catch(err => alert('خطأ في إنشاء الحساب: ' + err.message));
+    });
+
+    // تسجيل الخروج
+    logoutBtn.addEventListener('click', () => {
+      auth.signOut();
+    });
+
+    // تحديث الواجهة حسب حالة تسجيل الدخول
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        userEmailSpan.textContent = user.email;
+        authContainer.style.display = 'none';
+        registerContainer.style.display = 'none';
+        mainApp.style.display = 'block';
+
+        loadRecoveryData();
+      } else {
+        authContainer.style.display = 'block';
+        registerContainer.style.display = 'none';
+        mainApp.style.display = 'none';
+        clearInterval(recoveryInterval);
+        recoveryDisplay.textContent = "00:00:00";
+        relapseCountDisplay.textContent = "عدد الانتكاسات: 0";
+      }
+    });
+
+    // تنسيق الوقت
+    function formatTime(seconds) {
+      const days = Math.floor(seconds / (3600 * 24));
+      const hrs = Math.floor((seconds % (3600 * 24)) / 3600);
+      const mins = Math.floor((seconds % 3600) / 60);
+      const secs = seconds % 60;
+      return `${days} يوم ${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    // تحميل بيانات التعافي من localStorage خاص بالمستخدم
+    function loadRecoveryData() {
+      const user = auth.currentUser;
+      if (!user) return;
+
+      const startTimestamp = localStorage.getItem(`recoveryStart_${user.uid}`);
+      if (startTimestamp) {
+        startRecoveryTimer(new Date(parseInt(startTimestamp)));
+      } else {
+        recoveryDisplay.textContent = "00:00:00";
+      }
+
+      const relapseCount = parseInt(localStorage.getItem(`relapseCount_${user.uid}`)) || 0;
+      relapseCountDisplay.textContent = `عدد الانتكاسات: ${relapseCount}`;
+    }
+
+    // بدء العداد
+    function startRecoveryTimer(startTime) {
+      if (recoveryInterval) clearInterval(recoveryInterval);
+      recoveryInterval = setInterval(() => {
+        const now = new Date();
+        const diffSeconds = Math.floor((now - startTime) / 1000);
+        recoveryDisplay.textContent = formatTime(diffSeconds);
+      }, 1000);
+      recoveryInterval._startTime = startTime;
+    }
+
+    // أزرار العداد
+    startBtn.addEventListener('click', () => {
+      const user = auth.currentUser;
+      if (!user) return alert('يجب تسجيل الدخول أولاً');
+
+      if (!localStorage.getItem(`recoveryStart_${user.uid}`)) {
+        const now = Date.now();
+        localStorage.setItem(`recoveryStart_${user.uid}`, now.toString());
+        startRecoveryTimer(new Date(now));
+      }
+    });
+
+    resetBtn.addEventListener('click', () => {
+      const user = auth.currentUser;
+      if (!user) return alert('يجب تسجيل الدخول أولاً');
+
+      localStorage.removeItem(`recoveryStart_${user.uid}`);
+      clearInterval(recoveryInterval);
+      recoveryInterval = null;
+      recoveryDisplay.textContent = "00:00:00";
+
+      let count = parseInt(localStorage.getItem(`relapseCount_${user.uid}`)) || 0;
+      count++;
+      localStorage.setItem(`relapseCount_${user.uid}`, count.toString());
+      relapseCountDisplay.textContent = `عدد الانتكاسات: ${count}`;
+
+      alert("تم تسجيل الانتكاسة. يمكنك البدء من جديد.");
+    });
+
+    resetRelapseBtn.addEventListener('click', () => {
+      const user = auth.currentUser;
+      if (!user) return alert('يجب تسجيل الدخول أولاً');
+
+      if (confirm("هل أنت متأكد أنك تريد إعادة تعيين عدد الانتكاسات؟")) {
+        localStorage.setItem(`relapseCount_${user.uid}`, '0');
+        relapseCountDisplay.textContent = "عدد الانتكاسات: 0";
+        alert("تمت إعادة تعيين عدد الانتكاسات.");
+      }
+    });
+  </script>
+
+</body>
+</html>
