@@ -191,6 +191,80 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.05);
   font-family: 'Tajawal', sans-serif;
 }
+  /* 📱 تحسين العرض للهواتف المحمولة */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2em;
+      }
+
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      nav a {
+        padding: 10px 15px;
+        font-size: 1em;
+      }
+
+      .hero-image {
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .intro-box {
+        margin: 20px 10px;
+        padding: 20px;
+      }
+
+      .intro-box h2 {
+        font-size: 1.5em;
+      }
+
+      .intro-box p {
+        font-size: 1em;
+      }
+
+      .info-card {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .info-card img {
+        width: 100%;
+        height: auto;
+      }
+
+      .info-text {
+        padding: 15px;
+      }
+
+      .countdown-section {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+      }
+
+      .timer-box {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+
+      .quote-box {
+        font-size: 1em;
+        margin: 20px 10px;
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- باقي جسم الموقع كما هو بدون تغيير -->
+
+  <!-- ... كل الكود الموجود في <body> يبقى كما هو لأنه لا يحتاج تغيير، فقط CSS هو الذي عالج المشكلة ... -->
+
+</body>
+</html>
 
   </style>
 </head>
